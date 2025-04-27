@@ -1,33 +1,36 @@
-import keyword
 """ Het programma berekent de pensioenleeftijd en het pensioenbedrag van een werknemer."""
-week_uitkering = 0 #globale variabel
+
+lijst_werkstatuut = ["medewerker", "zelfstandige", "ambtenaar"]
+
 def bereken_pensioenleeftijd(leeftijd, werkstatuut):
     """Berekend de pensioenuitkering op basis van de leeftijd en het werkstatuut."""
-    extra_per_week_1 = 20 #extra per week medewerker
-    extra_per_week_2 = 15 #extra per week zelfstandige
-    extra_per_week_3 = 25 #extra per week ambtenaar
-    global week_uitkering
     if werkstatuut == "medewerker":
         if leeftijd >= 65 and leeftijd <= 70:
             week_uitkering = 350
-            return week_uitkering
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
         elif leeftijd > 70:
-            week_uitkering =  350 + extra_per_week_1
-            return week_uitkering
-    elif werkstatuut == "zelfstandige":
+            week_uitkering = 350 + 20 #extra toeslag medewerker voor ouderen
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
+    if werkstatuut == "zelfstandige":
         if leeftijd >= 65 and leeftijd <= 70:
             week_uitkering = 300
-            return week_uitkering
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
         elif leeftijd > 70:
-            week_uitkering = 300 + extra_per_week_2
-            return week_uitkering
-    elif werkstatuut == "ambtenaar":
+            week_uitkering = 300 + 15 #extra toeslag zelfstandige voor ouderen
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
+    if werkstatuut == "ambtenaar":
         if leeftijd >= 65 and leeftijd <= 70:
             week_uitkering = 370
-            return week_uitkering
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
         elif leeftijd > 70:
-            week_uitkering = 370 + extra_per_week_3
-            return week_uitkering
+            week_uitkering = 370 + 25 #extra toeslag ambtenaar voor ouderen
+            uitv_1 = f"Je krijgt € {week_uitkering} per week."
+    if werkstatuut in lijst_werkstatuut:
+        if leeftijd >= 18 and leeftijd < 65:
+            leeftijd_verschil = 65 - leeftijd
+            uitv_1 = f"Van werken word je gelukkig, je mag nog {leeftijd_verschil} jaar genieten van je baan."
+    
+    return uitv_1   
         
 """ verzoek tot invoer."""   
 print("Wat is je leeftijd?")
@@ -36,5 +39,5 @@ print("Wat is je werkstatuut?")
 werkstatuut = input("Voer in: medewerker, zelstandige of ambtenaar: ").lower()
 
 uitvoer = bereken_pensioenleeftijd(leeftijd, werkstatuut)
-print(f"Je krijgt € {uitvoer} per week.")
+print(uitvoer[0:])
 
